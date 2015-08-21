@@ -1,0 +1,6 @@
+development:
+  database_url: sqlite://db/development.db
+test:
+  database_url: sqlite://db/test.db
+production:
+  database_url: ENV['DATABASE_URL']
