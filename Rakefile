@@ -1,19 +1,5 @@
-require 'rubygems'
-require 'bundler/setup'
-require 'rspec/core/rake_task'
-require 'dotenv/tasks'
-
 task :default => :test
-task :test => :spec
 
-if !defined?(RSpec)
-  puts "spec targets require RSpec"
-else
-  desc "Run all examples"
-  RSpec::Core::RakeTask.new(:spec) do |t|
-    t.pattern = Dir['spec/**/*_spec.rb']
-  end
-end
 
 task :environment => :dotenv do
   require File.join(File.dirname(__FILE__), 'environment')
@@ -21,4 +7,19 @@ end
 
 task :console do
   ruby 'script/console'
+end
+namespace :db do
+  desc "Run migrations"
+  task :migrate, [:version] do |t, args|
+    require "sequel"
+    Sequel.extension :migration
+    db = Sequel.connect(ENV.fetch("DATABASE_URL"))
+    if args[:version]
+      puts "Migrating to version #{args[:version]}"
+      Sequel::Migrator.run(db, "db/migrations", target: args[:version].to_i)
+    else
+      puts "Migrating to latest"
+      Sequel::Migrator.run(db, "db/migrations")
+    end
+  end
 end

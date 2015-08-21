@@ -1,10 +1,7 @@
-require "rubygems"
-require "bundler/setup"
 require "sinatra"
 require File.join(File.dirname(__FILE__), "environment")
 
 configure do
-  set :views, "#{File.dirname(__FILE__)}/views"
   set :show_exceptions, :after_handler
 end
 
@@ -18,6 +15,5 @@ end
 
 # root page
 get "/" do
-  @profiles = Profile.all
-  erb :root
+  'hello world'
 end
