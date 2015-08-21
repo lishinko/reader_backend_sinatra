@@ -10,6 +10,7 @@ Sequel.migration do
       String :summary
       #don't know how to represent time. fortunately it's not important
       #String :time
+    end
   end
 
   down do
