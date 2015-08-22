@@ -1,7 +1,7 @@
 require "sinatra"
 require File.join(settings.root, "environment")
 require File.join(settings.root, "models/feed")
-require File.join(settings.root, "models/article")
+require File.join(settings.root, "lib/feed_service")
 configure do
   set :show_exceptions, :after_handler
 end
@@ -24,7 +24,6 @@ get '/feeds' do
   a.link
 end
 get '/articles' do
-  articles = Article.all
-  a = articles.first
-  a.summary
+  s = FeedService.new
+  s.get_articles(0)
 end
