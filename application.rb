@@ -15,5 +15,5 @@ end
 
 # root page
 get "/" do
-  'hello world'
+  redirect '/index.html'
 end
