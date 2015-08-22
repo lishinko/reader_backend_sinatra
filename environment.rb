@@ -1,18 +1,14 @@
-require 'rubygems'
-require 'bundler/setup'
-require 'ostruct'
-
 require 'sinatra' unless defined?(Sinatra)
+require "sequel"
+require "sinatra/config_file"
+config_file "#{settings.root}/config.yml"
 
 configure do
-  SiteConfig = OpenStruct.new(
-                 :title => 'Your Application Name',
-                 :author => 'Your Name',
-                 :url_base => 'http://localhost:4567/'
-               )
-
   # load models
-  $LOAD_PATH.unshift("#{File.dirname(__FILE__)}/lib")
-  Dir.glob("#{File.dirname(__FILE__)}/lib/*.rb") { |lib| require File.basename(lib, '.*') }
+  $LOAD_PATH.unshift("#{settings.root}/lib")
+  Dir.glob("#{settings.root}/lib/*.rb") { |lib| require File.basename(lib, '.*') }
 
+end
+configure do
+  DB = Sequel.connect settings.database
 end

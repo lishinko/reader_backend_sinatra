@@ -1,6 +1,6 @@
 require "sinatra"
-require File.join(File.dirname(__FILE__), "environment")
-
+require File.join(settings.root, "environment")
+require File.join(settings.root, "models/feed")
 configure do
   set :show_exceptions, :after_handler
 end
@@ -16,4 +16,9 @@ end
 # root page
 get "/" do
   redirect '/index.html'
+end
+get '/feeds' do 
+  feeds = Feed.all
+  a = feeds.first
+  a.link
 end
