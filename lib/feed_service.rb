@@ -6,7 +6,7 @@ class FeedService
   end
   def get_articles(page_num = 0)
     articles = Article.all
-    s = articles.map { |e| e.to_json }
-    s.to_json
+	s = articles.map { |e| e.values }
+	s
   end
 end

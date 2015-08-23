@@ -25,5 +25,6 @@ get '/feeds' do
 end
 get '/articles' do
   s = FeedService.new
-  s.get_articles(0)
+  hash = s.get_articles(0)
+  hash.to_json
 end
