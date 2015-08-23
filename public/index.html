@@ -77,18 +77,66 @@
           <h1 class="page-header">Dashboard</h1>
           <h2 class="sub-header">Section title</h2>
           <div class="list-group">
-            <a class="list-group-item" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-              Cras justo odio
-            </a>
-            <div class="collapse" id="collapseExample">
+            <a href="#summary1" class="list-group-item" id="article1" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="summary1">title</a>
+            <div class="collapse" id="summary1">
               <div class="well">
-                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. 
+                summary
               </div>
             </div>
-            <a href="#" class="list-group-item" id="list1">Dapibus ac facilisis in</a>
-            <a href="#" class="list-group-item">Morbi leo risus</a>
-            <a href="#" class="list-group-item">Porta ac consectetur ac</a>
-            <a href="#" class="list-group-item" id="list4">Vestibulum at eros</a>
+            <a href="#summary2" class="list-group-item" id="article2" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="summary2">title</a>
+            <div class="collapse" id="summary2">
+              <div class="well">
+                summary
+              </div>
+            </div>
+            <a href="#summary3" class="list-group-item" id="article3" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="summary3">title</a>
+            <div class="collapse" id="summary3">
+              <div class="well">
+                summary
+              </div>
+            </div>
+            <a href="#summary4" class="list-group-item" id="article4" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="summary4">title</a>
+            <div class="collapse" id="summary4">
+              <div class="well">
+                summary
+              </div>
+            </div>
+            <a href="#summary5" class="list-group-item" id="article5" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="summary5">title</a>
+            <div class="collapse" id="summary5">
+              <div class="well">
+                summary
+              </div>
+            </div>
+            <a href="#summary6" class="list-group-item" id="article6" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="summary6">title</a>
+            <div class="collapse" id="summary6">
+              <div class="well">
+                summary
+              </div>
+            </div>
+            <a href="#summary7" class="list-group-item" id="article7" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="summary7">title</a>
+            <div class="collapse" id="summary7">
+              <div class="well">
+                summary
+              </div>
+            </div>
+            <a href="#summary8" class="list-group-item" id="article8" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="summary8">title</a>
+            <div class="collapse" id="summary8">
+              <div class="well">
+                summary
+              </div>
+            </div>
+            <a href="#summary9" class="list-group-item" id="article9" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="summary9">title</a>
+            <div class="collapse" id="summary9">
+              <div class="well">
+                summary
+              </div>
+            </div>
+            <a href="#summary10" class="list-group-item" id="article10" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="summary10">title</a>
+            <div class="collapse" id="summary10">
+              <div class="well">
+                summary
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -101,21 +149,20 @@
     <script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
       <script type="text/javascript">
         function loadRss (url) {
-          $.ajax({
-            url: url,
-            type: 'GET',
-            datatype: 'text',
-            crossDomain : true,
-            success: function(data, status){
-              alert(status);
-            }
+          $.get(url, function(data, status) {
+            var json = JSON.parse(data)
+            for (var i = 1; i <= json.length && i <= 10; i++) {
+              var article = json[i-1];
+              var articleID = '#article' + i;
+              var summaryID = '#summary' + i + ' .well';
+              $(articleID).text(article.title);
+              $(summaryID).html(article.summary);
+            };
           })
         };
         
         $(document).ready(function() {
-          $("#list1").click(function() {
-            loadRss("http://rss.sina.com.cn/news/marquee/ddt.xml");
-          })
+          loadRss("/articles")
         })
       </script>
   </body>
