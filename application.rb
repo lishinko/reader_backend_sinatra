@@ -28,3 +28,10 @@ get '/articles' do
   hash = s.get_articles(0)
   hash.to_json
 end
+get '/refresh' do
+   
+  s = FeedService.new
+  s.refresh
+  'ok'
+end
+
