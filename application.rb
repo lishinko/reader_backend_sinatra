@@ -23,9 +23,11 @@ get '/feeds' do
   a = feeds.first
   a.link
 end
-get '/articles' do
+get '/articles/:page' do
   s = FeedService.new
-  hash = s.get_articles(0)
+  page = params[:page].to_i
+  page = page > 0 ? page : 1
+  hash = s.get_articles(page)
   hash.to_json
 end
 get '/refresh' do

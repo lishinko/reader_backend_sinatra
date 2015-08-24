@@ -4,6 +4,8 @@ gem 'sinatra-contrib'
 gem 'sinatra-sequel'
 gem 'sequel'
 gem 'feedjira'
+gem 'will_paginate'
+
 group :development, :test do
   gem 'thin'
   gem 'sqlite3'

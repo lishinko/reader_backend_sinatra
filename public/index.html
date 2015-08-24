@@ -150,7 +150,7 @@
       <script type="text/javascript">
         function loadRss (url) {
           $.get(url, function(data, status) {
-            var json = JSON.parse(data)
+            var json = JSON.parse(data);
             for (var i = 1; i <= json.length && i <= 10; i++) {
               var article = json[i-1];
               var articleID = '#article' + i;
@@ -162,7 +162,7 @@
         };
         
         $(document).ready(function() {
-          loadRss("/articles")
+          loadRss("/articles/1")
         })
       </script>
   </body>

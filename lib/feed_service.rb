@@ -13,8 +13,13 @@ class FeedService
     end	
   end
   def get_articles(page_num = 0)
-    articles = Article.all
-	s = articles.map { |e| e.values }
-	s
+   @ds.paginate(page_num, 10)
+   articles = @ds.all
+	ss = articles.map { |e| e.values }
+	ss
+  end
+  def initialize
+    @ds = Article.dataset
+    @ds.extension! :pagination
   end
 end
