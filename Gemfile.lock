@@ -48,7 +48,6 @@ GEM
       eventmachine (~> 1.0)
       rack (~> 1.0)
     tilt (1.4.1)
-    will_paginate (3.0.7)
 
 PLATFORMS
   ruby
@@ -62,7 +61,6 @@ DEPENDENCIES
   sinatra-sequel
   sqlite3
   thin
-  will_paginate
 
 BUNDLED WITH
    1.10.6

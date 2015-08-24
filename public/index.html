@@ -138,6 +138,12 @@
               </div>
             </div>
           </div>
+          <nav>
+            <ul class="pager" id="pager">
+              <li class="previous"><a href="#">Previous</a></li>
+              <li class="next"><a href="#">Next</a></li>
+            </ul>
+          </nav>
         </div>
       </div>
     </div>
@@ -148,22 +154,51 @@
     <script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
     <script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
       <script type="text/javascript">
-        function loadRss (url) {
-          $.get(url, function(data, status) {
+        function refreshPager (page) {
+          if (page <= 0) {page = 1};
+          curPage = page;
+          if (curPage <= 1) {
+            $("#pager .previous").addClass("disabled")
+          }else{
+            $("#pager .previous").removeClass("disabled")
+          }
+        }
+        function loadRss (url, page) {
+          refreshPager(page);
+          var url_page = url + curPage;
+          $.get(url_page, function(data, status) {
             var json = JSON.parse(data);
-            for (var i = 1; i <= json.length && i <= 10; i++) {
-              var article = json[i-1];
+            for (var i = 1;  i <= 10; i++) {
               var articleID = '#article' + i;
               var summaryID = '#summary' + i + ' .well';
-              $(articleID).text(article.title);
-              $(summaryID).html(article.summary);
+              if (i <= json.length) {
+                var article = json[i-1];
+                $(articleID).text(article.title);
+                $(summaryID).html(article.summary);
+                $(articleID).show();
+                $(summaryID).show();
+              }else{
+                $(articleID).hide();
+                $(summaryID).hide();
+              }
+              
             };
           })
         };
         
         $(document).ready(function() {
-          loadRss("/articles/1")
-        })
+          var curPage = 1;
+          loadRss("/articles/", curPage);
+          $("#pager .previous").click(function() {
+            var page = curPage - 1;
+            loadRss("/articles/", page);
+          });
+          $("#pager .next").click(function() {
+            var page = curPage + 1;
+            loadRss("/articles/", page);
+          });
+        });
+
       </script>
   </body>
 </html>
