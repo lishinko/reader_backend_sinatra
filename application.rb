@@ -18,7 +18,7 @@ end
 get "/" do
   redirect '/index.html'
 end
-get '/feeds' do 
+get '/feeds' do
   feeds = Feed.all
   a = feeds.first
   a.link
@@ -29,7 +29,6 @@ get '/articles' do
   hash.to_json
 end
 get '/refresh' do
-   
   s = FeedService.new
   s.refresh
   'ok'
