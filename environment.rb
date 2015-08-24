@@ -1,11 +1,11 @@
-require 'sinatra' unless defined?(Sinatra)
+require 'sinatra' 
 require "sequel"
 require "sinatra/config_file"
 config_file "#{settings.root}/config.yml"
 
 configure do
   # load models
-  $LOAD_PATH.unshift("#{settings.root}/lib")
+  #$LOAD_PATH.unshift("#{settings.root}/lib")
   #Dir.glob("#{settings.root}/lib/*.rb") { |lib| require File.basename(lib, '.*') }
 
 end
