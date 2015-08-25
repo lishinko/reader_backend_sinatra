@@ -24,8 +24,8 @@ class App < Sinatra::Base
   end
   get '/feeds' do
     feeds = Feed.all
-    a = feeds.first
-    a.link
+    s = feeds.map{|e| e.link}
+    s.to_json
   end
   get '/articles/:page' do
     s = FeedService.new
