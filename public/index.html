@@ -154,6 +154,7 @@
     <script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
     <script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
       <script type="text/javascript">
+        var curPage = 1;
         function refreshPager (page) {
           if (page <= 0) {page = 1};
           curPage = page;
@@ -187,7 +188,6 @@
         };
         
         $(document).ready(function() {
-          var curPage = 1;
           loadRss("/articles/", curPage);
           $("#pager .previous").click(function() {
             var page = curPage - 1;
