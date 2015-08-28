@@ -27,16 +27,29 @@ class App < Sinatra::Base
     s = feeds.map{|e| e.link}
     s.to_json
   end
-  get '/articles/:page' do
-    s = FeedService.new
+
+	post '/feeds/new' do
+		request.body.rewind
+		data = JSON.parse request.body.read
+		"hello #{data[:link]}"
+	end
+	delete '/feeds/:id' do
+	end
+
+ get '/articles/:page' do
+    #s = FeedService.new
     page = params[:page].to_i
     page = page > 0 ? page : 1
-    hash = s.get_articles(page)
+    hash = @s.get_articles(page)
     hash.to_json
   end
   get '/refresh' do
-    s = FeedService.new
-    s.refresh
+    #s = FeedService.new
+    @s.refresh
     'ok'
   end
+	def initialize
+		super
+		@s = FeedService.new
+	end
 end

@@ -1,3 +1,22 @@
+function newFeed(feed_url){
+	//$.post("/feeds/new", {link:feed_url}, function(data, status){
+	//	alert(data);
+//	})
+	$.ajax({
+		url: '/feeds/new',
+		data: {
+			link: feed_url,
+		},
+		type: 'post',
+		dataType:'json',
+		success:function(data, status){
+			alert(data);
+		},
+		error:function(){
+			alert('error');
+		}
+	});
+}
 function removeFeed(ele){
 	var feed = $(ele).siblings("span").text();
 	alert(feed);
@@ -23,5 +42,10 @@ $(document).ready(function() {
 	});
 	$("#feed-list > li > a").click(function(){
 		removeFeed(this);
+	});
+	$("#new-feed > button").click(function(){
+		var input = $("#new-feed > input");
+		var url = input.val();
+		newFeed(url);
 	});
 })	
