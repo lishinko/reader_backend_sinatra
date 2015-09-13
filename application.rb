@@ -35,6 +35,12 @@ class App < Sinatra::Base
 		a.to_s
 	end
 	delete '/feeds/:id' do
+		feed_id = params[:id].to_i
+		f = Feed.where(id: feed_id)
+		s = f.link
+		f.destroy
+		s
+
 	end
 
  get '/articles/:page' do

@@ -10,6 +10,9 @@ function removeFeed(ele){
 function addFeed(link){
 	var element = '<li class="list-group-item"><span name="feed">' + link + '</span><a href="#"><span class="text-right">删除</span></a></li>';
 	$("#feed-list").append(element);
+	$("#feed-list > li:last > a").click(function(){
+		removeFeed(this);
+	});
 }
 function loadFeeds(url){
 	$.get(url, function(data, status) {
@@ -26,9 +29,7 @@ $(document).ready(function() {
 		$("#feed-list").toggleClass("hide");
 		loadFeeds('/feeds');
 	});
-	$("#feed-list > li > a").click(function(){
-		removeFeed(this);
-	});
+	
 	$("#new-feed > button").click(function(){
 		var input = $("#new-feed > input");
 		var url = input.val();
