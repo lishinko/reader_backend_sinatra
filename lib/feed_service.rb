@@ -17,6 +17,11 @@ class FeedService
     ss = articles.map { |e| e.values }
     ss
   end
+	def add_feed(url)
+		return 'url must start with http://' unless url.start_with? "http://"
+		Feed.create(link:url)
+		Feed.all
+	end
   def initialize
     @ds = Article.dataset
     @ds.extension! :pagination
