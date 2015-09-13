@@ -37,14 +37,12 @@ class App < Sinatra::Base
 	end
 
  get '/articles/:page' do
-    #s = FeedService.new
     page = params[:page].to_i
     page = page > 0 ? page : 1
     hash = @s.get_articles(page)
     hash.to_json
   end
   get '/refresh' do
-    #s = FeedService.new
     @s.refresh
     'ok'
   end
