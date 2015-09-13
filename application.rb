@@ -31,7 +31,7 @@ class App < Sinatra::Base
 	post '/feeds/new' do
 		request.body.rewind
 		data = JSON.parse request.body.read
-		"hello #{data[:link]}"
+		"hello #{data["link"]}"
 	end
 	delete '/feeds/:id' do
 	end
