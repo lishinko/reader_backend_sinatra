@@ -24,7 +24,7 @@ class App < Sinatra::Base
   end
   get '/feeds' do
     feeds = Feed.all
-    s = feeds.map{|e| e.link}
+		s = feeds.map{|e| {link: e.link, id: e.id}}
     s.to_json
   end
 
@@ -36,7 +36,7 @@ class App < Sinatra::Base
 	end
 	delete '/feeds/:id' do
 		feed_id = params[:id].to_i
-		f = Feed.where(id: feed_id)
+		f = Feed[feed_id]
 		s = f.link
 		f.destroy
 		s
